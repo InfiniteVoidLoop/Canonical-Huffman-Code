@@ -31,6 +31,8 @@ int main(int argc, char* argv[]){
     else if (extFileIn == "bin" && extFileOut == "txt"){
         clock_t startTime = clock();
         decompressToTextFile();
+        cout << "Input file: " << fileNameIn << endl;
+        cout << "Output file: " << fileNameOut << endl;
         cout << "Execution time: " << (clock() - startTime) / CLOCKS_PER_SEC << "s" << endl;
     }
     else{

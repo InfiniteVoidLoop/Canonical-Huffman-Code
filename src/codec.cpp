@@ -11,7 +11,7 @@
 
 void decompressToTextFile(void)  // decode data
 { 
-    cerr << "Decompressing data, please wait . . ." << endl;
+    cerr << "Decompressing data, please wait . . .\n" << endl;
     fstream fileIn(fileNameIn, ios::in | ios::binary);
     fstream fileOut(fileNameOut, ios::out);
 
@@ -93,7 +93,7 @@ void decompressToTextFile(void)  // decode data
         }   
     }
     canonicalHuffmanTree.deleteTree(canonicalHuffmanTree.root);
-    cout << "Decompressing successfully" << endl;
+    cout << "Decompressing completed successfully" << endl;
     fileIn.close();
     fileOut.close();
 }
@@ -106,7 +106,7 @@ void compressToBinaryFile(void)   // compress data
         cout << "Can't open file " << fileNameOut << endl;
         return;
     }
-    cout << "Compressing data, please wait . . ." << endl;
+    cout << "Compressing data, please wait . . .\n" << endl;
     HuffmanCompressing huffmanCompressing;
     huffmanCompressing.buildHuffmanTree();
     huffmanCompressing.getMask();
