@@ -1,7 +1,7 @@
-# Canonical Huffman Code Compression and Decompression
+# Huffman Code Compression and Decompression
 
 ## Overview 
-This is a better version of Huffman Code and was developed in C++ for compressing and decompressing text file as an assignment for Data Structure & Algorithm Course, University of Science - VNUHCM  
+This project was developed in C++ for compressing and decompressing text file as an assignment for Data Structure & Algorithm Course, University of Science - VNUHCM
 
 ### Features
 - **Compression**: Compress text file into binary file.  
@@ -17,7 +17,7 @@ This is a better version of Huffman Code and was developed in C++ for compressin
     - [Decompression](#decompression)  
 3. [How It Works](#how-it-works)  
 4. [Binary File Format](#binary-file-format)  
-5. [Future enhancements](#future-enhancements)  
+5. [Enhancements](#enhancements)  
 6. [Contact Information](#contact-information)
 7. [Reference](#reference)
 ---
@@ -31,13 +31,25 @@ This is a better version of Huffman Code and was developed in C++ for compressin
 
 2. Compile the source code to exe
     ```bash
-    g++ *.cpp -o 
-    
-## Usage  
+    cd src
+    g++ *.cpp -o main
 
+## Usage  
+ - Note that the input file should be in the same directory as the executable file `main`, which is located in the `src` folder.
+ - If you want file in another directory, you can use the full path to the file.
 ### Compression  
+- To compress a text file, run the following command:  
+      ```bash
+      ./main <input file1> <input file2>
+    ```
+    - For compressing a file: `<input file1>` should end with `.txt` and `<input file2>` should end with `.bin`.
 
 ### Decompression
+- To decompress a binary file, run the following command:  
+      ```bash
+      ./main <input file1> <input file2>
+    ```
+    - For decompressing a file: `<input file1>` should end with `.bin` and `<input file2>` should end with `.txt`.
 
 ## How It Works  
 
@@ -45,52 +57,43 @@ This is a better version of Huffman Code and was developed in C++ for compressin
    The program reads the input file and calculates the frequency of each unique character.  
 
 2. **Huffman Tree Construction**:  
-   Using the calculated frequencies, a standard Huffman binary tree is constructed. This tree assigns unique Huffman codes to each character based on their frequency, following standard Huffman encoding principles.
+   Using calculated frequencies, builds a binary tree structure where characters with lower frequencies are given longer binary codes.
 
-3. **Canonical Huffman Code**:  
-   From the bit length of each character, the program generates Canonical Huffman Codes and assign code for each character. 
+3. **Encoding**:  
+   Each character is mapped to its respective unique binary code based on the Huffman tree.  
 
-5. **Compression**:  
-   The program replaces characters in the input text with their respective canonical Huffman binary codes.
+4. **Compression**:  
+   The program replaces characters in the input text with their respective Huffman binary codes to save space.  
 
-6. **Decompression**:   
-   The binary file only stores the bit length of each character which have already been sorted, after that we recover the Canonical Huffman Code and then build a tree in order to restore the text file efficiently.
+5. **Decompression**:  
+   The program reconstructs the original text by recovering the huffman tree from the code table at file header.
 
 ---
 ## Binary File Format
-When saving Canonical Huffman-encoded data into a binary file during compression, the file follows a specific structure. Below is the structure of the saved Huffman binary file:
+When saving Huffman-encoded data into a binary file during compression, the file follows a specific structure. Below is the structure of the saved Huffman binary file:
 
 
 | **Name**            | **Size**   | **Description**                              |
 |---------------------|------------|-----------------------------------------------|
 | **Table_size**      | 1 byte     | Size of the table                             |
 | **Character 1**     | 1 byte     | Character 1                                    |
-| **Code length 1**   | 1 byte     | Length of the code for character 1        |
+| **Code length 1**   | 1 byte     | Length of Huffman Code for character 1        |
+| **Code 1**          | 4 bytes    | Huffman Code for character 1                  |
 | **Character 2**     | 1 byte     | Character 2                                    |
-| **Code length 2**   | 1 byte     | Length of the code for character 2        |
-|   **...**           |   ...       |          ...                                     |
+| **Code length 2**   | 1 byte     | Length of Huffman Code for character 2        |
+| **Code 2**          | 4 bytes    | Huffman Code for character 2                  |
+|   **...**           |   ...       |          ...                                           |
 | **Encoded Binary Data** | -       | Encoded Huffman data                         |
 | **Padding**         | 1 byte     | Number of bits used for alignment            |
 
 ---
 
-## Future Enhancements  
+## Enhancements
+We've already improved this project by using Canonical Huffman Tree which can encode file in fewer bits. With knowledge of the canonical Huffman algorithm, it is then possible to recreate the entire table (symbol and code values) from just the bit-lengths.
 
-1. **Support for Larger Input Data**:  
-   Enhance the program to handle very large files by implementing streaming-based compression and decompression, allowing the program to process data incrementally rather than loading entire files into memory.  
+There is a case when the depth of Huffman Tree is high (more than 32), so the previous version can face limitations when dealing with large code in the table. However, it is a pieace of cake when using Canonical Huffman Tree and save only the bit-lengths in the table.  
 
-
-2. **Graphical User Interface (GUI)**:  
-   Create a user-friendly GUI to make the program accessible to users without requiring terminal/command-line knowledge.
-
-3. **Extend to Support Dynamic Huffman Coding**:  
-   Implement dynamic Huffman coding techniques to allow the system to adapt encoding strategies on the fly, based on changing input data patterns during runtime.
-
-4. **Optimize Compression Ratios**:  
-   Further optimize the Huffman encoding logic to achieve even better compression ratios by experimenting with alternative variations of the Huffman coding algorithm or hybrid compression strategies.
-
-5. **Support for Compressing Multiple Files**:
-    Currently, the program compresses and decompresses a single file at a time. 
+Explore our Canonical Huffman Code with our [Canonical Huffman Coding Project on GitHub](https://github.com/InfiniteVoidLoop/Canonical-Huffman-Code)
 
 ---
 
