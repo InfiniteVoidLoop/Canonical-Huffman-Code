@@ -1,21 +1,18 @@
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wno-char-subscripts -Wno-sign-compare -Wno-unused-variable
 SRCS = src/main.cpp src/utils.cpp src/codec.cpp src/globalVar.cpp
-TARGET = main
+TARGET = huffman
+
+all: $(TARGET)
 
 $(TARGET):
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET)
+	g++ -std=c++11 -w $(SRCS) -o $(TARGET)
 
 .PHONY: clean run
 
 clean:
-	del /Q $(TARGET).exe 2>NUL
+	-rm -f $(TARGET) $(TARGET).exe 2>/dev/null || del $(TARGET).exe 2>nul
 
-# Ignore all targets
-.PRECIOUS: %
+run: $(TARGET)
+	./$(TARGET) $(word 2,$(MAKECMDGOALS)) $(word 3,$(MAKECMDGOALS))
+
 %:
 	@:
-
-# Run with direct arguments
-run: $(TARGET)
-	./$(TARGET) $(wordlist 2,3,$(MAKECMDGOALS))
