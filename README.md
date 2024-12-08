@@ -39,15 +39,19 @@ This project was developed in C++ for compressing and decompressing text file as
  - If you want file in another directory, you can use the full path to the file.
 ### Compression  
 - To compress a text file, run the following command:  
-      ```bash
+    ```bash
       ./main <input file1> <input file2>
+
+      
     ```
     - For compressing a file: `<input file1>` should end with `.txt` and `<input file2>` should end with `.bin`.
 
 ### Decompression
 - To decompress a binary file, run the following command:  
-      ```bash
+    ```bash
       ./main <input file1> <input file2>
+
+
     ```
     - For decompressing a file: `<input file1>` should end with `.bin` and `<input file2>` should end with `.txt`.
 
